@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <META name="viewport" content="width=device-width, intitial-scale=1.0">
+    <title> Valentines Surprise </title>
+    <style>
+        body {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            text-align: center;
+            background-color: pink;
+            background-image: url('2.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 20px;
+        }
+
+        @font-face {
+            font-family: f;
+            src: url();
+        }
+
+        h1 {
+            font-family: Arial, 'fantasy';
+            color: rgb(93, 6, 34);
+        }
+
+        h2 {
+            color: rgb(239, 151, 166)
+        }
+
+        .box-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        #box-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .box {
+            max-width: 300px;
+            padding: 10px;
+            background-color: rgb(134, 18, 54);
+            border-radius: 10px;
+            box-shadow: 0 0 10px pink(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .box-image {
+            width: 150px;
+            height: 100px;
+            border-radius: 7%;
+            margin-bottom: 20px;
+            border: 2px solid pink;
+        }
+
+        .box-display {
+            padding: 15px;
+            background-color: rgb(93, 6, 34);
+            border-radius: 10px;
+            font-size: 18px;
+            color:pink;
+        }
+        
+        .open-btn {
+            cursor: pointer;
+            padding: 10px;
+            background-color: rgb(93, 6, 34);
+            color: rgb(255, 215, 228);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.2s ease;
+        }
+
+        .open-btn:hover {
+            background-color: whitesmoke;
+        }
+    </style>
+</head>
+<body>
+    </br></br></br>
+    <h1>Surprise Boxes!!!</h1>
+
+    
+    <div class="box-container">
+
+        <div class="box" id="box1">
+            <h2>Why you are my absolute favourite boi</h2>
+            <img class="box-image" src="a1.jpg" alt="Display1 image">
+            <div class="box-display" id="display1"></div>
+            <ul id="box-list1">
+            </ul>
+            <button class="open-btn" onclick="revealReason('display1', m1, 'box-list1', 'box1-btn')">Next reason</button>
+        </div>  
+        
+        <div class="box" id="box2">
+            <h2>What's that I miss about you</h2>
+            <img class="box-image" src="a2.jpg" alt="Display2 image">
+            <div class="box-display" id="display2"></div>
+            <ul id="box-list2">
+            </ul>
+            <button class="open-btn" onclick="revealReason('display2', m2, 'box-list2', 'box2-btn')">Next reason</button>
+        </div>
+
+        <div class="box" id="box3">
+            <h2>What I'm grateful for</h2>
+            <img class="box-image" src="a3.jpg" alt="Display3 image">
+            <div class="box-display" id="display3"></div>
+            <ul id="box-list3">
+            </ul>
+            <button class="open-btn" onclick="revealReason('display3', m3, 'box-list3', 'box3-btn')">Next reason</button>
+        </div>
+
+    </div>
+
+    <script>
+
+        let totalClicks1 = 0;
+        let totalClicks2 = 0;
+        let totalClicks3 = 0;
+
+
+        let currentIndex1 = 0;
+        let currentIndex2 = 0;
+        let currentIndex3 = 0;
+
+        const m1 = [
+            "You literally have the prettiest smile, and eyes, and face ,and hair!",
+            "You make me the happiest person alive andmakes me laugh so genuinely.",
+            "You give me the cutest cutest and best kisses everrrr!!!",
+            "You draw cute notes to show me when we are on vc and I'm on another call",
+            "You laugh at my jokes, you think I'm funny! I think you are pretty funny too!!!",
+            //add more if needed
+        ];
+
+        const m2 = [
+            "I miss your touch",
+            "I miss you lying on my chest",
+            "I miss holding your face",
+            "I miss going on rides with you even if it's from A block to F Block",
+            "I miss kissing your eyes, your cheeks, your lips, YOUR WHOLE FACE!",
+            "I miss being your passenger princess",
+            "I miss You nalloooonammm"
+            //add more if needed
+        ];
+
+        const m3 = [
+            "YOU",
+            "The unforgettable moments we have together",
+            "The little things you do that makes me the luckiest girl",
+            "The level of comfort and trust we have with each other",
+            "The open and honest communication between us",
+            "The commitment we both have to our relationship and the efforts we put",
+            //add more if needed
+        ];
+
+        function revealReason(displayId, messages, listId, btnId) {
+            const boxDisplay = document.getElementById(displayId);
+            const boxList = document.getElementById(listId);
+            const openBtn = document.getElementById(btnId);
+
+            let totalClicks;
+
+            let currentIndex;
+            if (listId === 'box-list1') {
+                currentIndex = currentIndex1;
+                currentIndex1 = (currentIndex1 + 1) % messages.length;
+                totalClicks = ++totalClicks1;
+            } else if (listId === 'box-list2') {
+                currentIndex = currentIndex2;
+                currentIndex2 = (currentIndex2 + 1) % messages.length;
+                totalClicks = ++totalClicks2;
+            } else if (listId === 'box-list3') {
+                currentIndex = currentIndex3;
+                currentIndex3 = (currentIndex3 + 1) % messages.length;
+                totalClicks = ++totalClicks3;
+            }
+
+            const newItem = document.createElement('li');
+            newItem.textContent = messages[currentIndex];
+            boxList.appendChild(newItem);
+
+            boxDisplay.textContent = newItem.textContent;
+
+            if (totalClicks >= 5) {
+                openBtn.textContent = "I LOVE YOU!";
+                openBtn.disabled = true; // Disable the button
+            }
+        }
+
+    </script>
+
+</br></br></br></br></br>
+    <h1>
+        I LOVE YOU ORUPAAADDDD!!!!
+    </h1>
+
+</body>
+</html>
